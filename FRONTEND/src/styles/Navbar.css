@@ -1,0 +1,215 @@
+/* General Navbar Styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    color: black;
+    font-weight: bold;
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Logo and Title */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .logo {
+    width: 50px;
+    height: auto;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 12px;
+    color: #4A148C;
+    font-style: italic;
+    font-family: sans-serif;
+  }
+  
+  /* Desktop Menu */
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 500;
+  }
+  
+  .menu-item {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+    padding: 4px 0;
+    text-align: center;
+    position: relative;
+  }
+  
+  .menu-item:hover {
+    color: blue;
+  }
+  
+  .menu-item hr {
+    height: 2px;
+    background: blue;
+    width: 60%;
+    margin: auto;
+    display: none;
+  }
+  
+  .menu-item:hover hr {
+    display: block;
+  }
+  
+  /* Mobile Menu Button */
+  .menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    background: white;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .mobile-menu .menu-item {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-menu .menu-item:hover {
+    color: blue;
+  }
+  
+  /* Profile Section */
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  /* Profile Dropdown */
+  .profile-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .profile-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid gray;
+  }
+  
+  .dropdown-icon {
+    width: 10px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 3.5rem; /* Equivalent to pt-14 */
+    font-size: 1rem; /* Equivalent to text-base */
+    font-weight: 500; /* Equivalent to font-medium */
+    color: rgb(75, 85, 99); /* Equivalent to text-gray-600 */
+    display: none; /* Equivalent to hidden */
+    /* opacity: 0; Initially hidden */
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    min-width: 160px;
+    gap: 8px;
+    background: #f5f5f5;
+  }
+  
+  .profile-dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  
+  .dropdown-item {
+    padding: 8px;
+    font-size: 14px;
+    color: gray;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    color: black;
+  }
+  
+  /* Login Button */
+  .login-button {
+    background: black;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background: blue;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 800px) {
+    .menu {
+      display: none;
+    }
+  
+    .menu-button {
+      display: block;
+    }
+  
+    .mobile-menu {
+      display: flex;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .title {
+      font-size: 20px;
+    }
+  
+    .profile-pic {
+      width: 28px;
+    }
+  }
+  
