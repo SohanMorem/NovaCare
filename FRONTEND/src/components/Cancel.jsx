@@ -11,29 +11,29 @@ const stripePromise = loadStripe("pk_test_51QuYyWHfp1Ms590tgHhRMMwhDODINYDLjw5iu
 export default function Cancel() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-    const appointmentId = searchParams.get("id");
-  const {backendurl,token}=useContext(AppContext)
+  const appointmentId = searchParams.get("id");
+  const { backendurl, token } = useContext(AppContext)
   console.log(appointmentId)
 
-  const paymentIntegration=async ()=>{
+  const paymentIntegration = async () => {
     try {
 
-      
 
-      if(!appointmentId){
+
+      if (!appointmentId) {
         toast.error("Appointment not found")
       }
 
-      const response=await axios.post(backendurl+"/api/user/paymentintegration",{appointmentId},{headers:{token}})
+      const response = await axios.post(backendurl + "/api/user/paymentintegration", { appointmentId }, { headers: { token } })
 
       // const {sessionId} = await response.data;
-      const {url} = await response.data;
+      const { url } = await response.data;
       const stripe = await stripePromise;
 
       if (!url) {
         toast.error("Failed to retrieve session ID.");
         return;
-    }
+      }
 
       // await stripe.redirectToCheckout({ sessionId });
 

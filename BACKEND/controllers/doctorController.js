@@ -4,6 +4,7 @@ import  jwt from "jsonwebtoken"
 import validator from "validator"
 import appointmentModel from "../models/appointmentModel.js"
 import {v2 as cloudinary} from "cloudinary"
+import {sendContact, sendMail} from '../middleware/sendMail.js'
 
 const changeAvailability=async (req,res)=>{
    
@@ -96,7 +97,7 @@ const cancelAppointment=async (req,res)=>{
         
         
         if(appointmentData){
-            await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+            await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true,payment:false})
     
             const {docId,slotDate,slotTime}=appointmentData
     
@@ -111,6 +112,25 @@ const cancelAppointment=async (req,res)=>{
             await doctorModel.findByIdAndUpdate(docId,{slots_book})
     
             res.json({success:true,message:"Appointment Cancelled Succcessfully"})
+
+            const cancelappointmentMessage = `<pre>
+Dear ${appointmentData.userData.name},
+
+We regret to inform you that your appointment scheduled on ${slotDate} at ${slotTime} with Dr. ${appointmentData.docData.name} has been cancelled due to the doctor's unavailability.  
+
+We sincerely apologize for the inconvenience. If you would like to reschedule, please contact us at  
+📞 <a href="tel:8140794715">8140794715</a>.  
+
+Thank you for your understanding.  
+
+Best regards,  
+NovaCare Health Management  
+</pre>`;
+
+            
+            
+          await sendMail(appointmentData.userData.email,"CANCEL APPOINTMENT","",cancelappointmentMessage)
+            
         
     } }catch (error) {
         res.json({ success: false, message: error.message })
@@ -236,8 +256,7 @@ const updateDoctorProfile=async (req,res)=>{
         }
 
         const updatedFields = { 
-            "docData.name": name, 
-            "docData.fees": fees, 
+            "docData.name": name,
             "docData.speciality": speciality, 
             "docData.experience": experience, 
             "docData.degree": degree, 

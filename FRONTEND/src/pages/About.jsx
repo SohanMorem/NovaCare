@@ -23,13 +23,13 @@ const About = () => {
           {/* Content */}
           <div className="w-96 md:w-1/2 px-4">
             <p className="text-black leading-relaxed mb-4">
-            Welcome to <strong className='text-black'>NovaCare</strong>, your reliable ally in simplifying healthcare management with ease and efficiency. At NovaCare, we recognize the difficulties people encounter while booking doctor appointments and maintaining their health records.
+              Welcome to <strong className='text-black'>NovaCare</strong>, your reliable ally in simplifying healthcare management with ease and efficiency. At NovaCare, we recognize the difficulties people encounter while booking doctor appointments and maintaining their health records.
             </p>
             <p className="text-black mb-4">
               Our mission is to provide seamless healthcare experiences with the help of advanced technology and
               superior service.
             </p>
-            
+
             <p className="text-Black">
               Our vision at <strong>NovaCare</strong> is to bridge the gap between patients and healthcare providers,
               making it easier to access the care you need, when you need it.
@@ -48,7 +48,7 @@ const About = () => {
           <div className="p-4 border rounded-lg shadow hover:shadow-md">
             <h4 className="text-xl font-semibold text-gray-800 mb-2">EFFICIENCY</h4>
             <p className="text-stone-900 text-sm">
-            At NovaCare, we prioritize efficiency to ensure your healthcare needs are met with speed and precision
+              At NovaCare, we prioritize efficiency to ensure your healthcare needs are met with speed and precision
             </p>
           </div>
 
@@ -56,7 +56,7 @@ const About = () => {
           <div className="p-4 border rounded-lg shadow hover:shadow-md">
             <h4 className="text-xl font-semibold text-gray-800 mb-2">CONVENIENCE</h4>
             <p className="text-stone-900 text-sm">
-            At NovaCare, we focus on providing convenience, making it easier for you to manage your healthcare with minimal effort
+              At NovaCare, we focus on providing convenience, making it easier for you to manage your healthcare with minimal effort
             </p>
           </div>
 
@@ -64,12 +64,12 @@ const About = () => {
           <div className="p-4 border rounded-lg shadow hover:shadow-md">
             <h4 className="text-xl font-semibold text-gray-800 mb-2">PERSONALIZATION</h4>
             <p className="text-stone-900 text-sm">
-            At NovaCare, we offer personalized healthcare solutions tailored to meet your unique needs and preferences
+              At NovaCare, we offer personalized healthcare solutions tailored to meet your unique needs and preferences
             </p>
           </div>
         </div>
       </section>
-      </>
+    </>
   )
 }
 

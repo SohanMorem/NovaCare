@@ -1,0 +1,202 @@
+/* General Styling */
+.my-appointment-container {
+    background: #f3f4f6;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Appointments List */
+  .appointments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Card Styling */
+  .appointment-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s;
+  }
+  
+  .appointment-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Doctor Info */
+  .doctor-info {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .doctor-info img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .doctor-details h2 {
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bold;
+  }
+
+  .doctor-details span {
+    font-size: 0.9rem;
+    color: black;
+    margin: 5px 0;
+    font-weight: 600;
+  }
+  
+  .doctor-details p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 5px 0;
+    font-weight: 600;
+  }
+  
+  /* Actions */
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .completed-btn {
+    height: 4rem;                  /* h-16 */
+    width: 100%;                    /* w-full */
+    font-size: 1.5rem;              /* text-2xl */
+    background-color: #e5e7eb;      /* bg-gray-200 */
+    color: #16a34a;                 /* text-green-600 */
+    font-weight: 600;               /* font-semibold */
+    padding: 0.5rem 1rem;           /* py-2 px-4 */
+    border-radius: 0.25rem;         /* rounded */
+  }
+
+  .canceled-btn {
+    width: 100%;                     /* w-full */
+    max-width: fit-content;          /* sm:w-auto */
+    border: 1px solid #ef4444;       /* border border-red-500 */
+    padding: 0.5rem 1rem;            /* px-4 py-2 */
+    border-radius: 0.25rem;          /* rounded */
+    background-color: #e5e7eb;       /* bg-gray-200 */
+    color: #dc2626;                  /* text-red-600 */
+    font-weight: 600;                /* font-semibold */
+  }
+
+  .cancel-btn {
+    width: 100%;                     /* w-full */
+    max-width: fit-content;          /* sm:w-auto */
+    padding: 0.5rem 1rem;            /* px-4 py-2 */
+    border-radius: 0.25rem;          /* rounded */
+    background-color: #f87171;       /* bg-red-400 */
+    color: #ffffff;                  /* text-white */
+    transition: all 0.3s;            /* transition-all duration-300 */
+  }
+  
+  .cancel-btn:hover {
+    background-color: #dc2626;       /* hover:bg-red-600 */
+  }
+  
+  .payment-done-btn {
+    width: 100%;                     /* w-full */
+    max-width: fit-content;          /* sm:w-auto */
+    border: 1px solid #3b82f6;       /* border border-blue-500 */
+    padding: 0.5rem 1rem;            /* px-4 py-2 */
+    border-radius: 0.25rem;          /* rounded */
+    background-color: #e5e7eb;       /* bg-gray-200 */
+    color: #2563eb;                  /* text-blue-600 */
+    font-weight: 600;                 /* font-semibold */
+  }
+
+  .pay-amount-btn {
+    width: 100%;                       /* w-full */
+    max-width: fit-content;            /* sm:w-auto */
+    padding: 0.5rem 1rem;              /* px-4 py-2 */
+    border-radius: 0.25rem;            /* rounded */
+    background-color: #60a5fa;         /* bg-blue-400 */
+    color: #ffffff;                    /* text-white */
+    transition: all 0.3s ease;         /* transition-all duration-300 */
+  }
+  
+  .pay-amount-btn:hover {
+    background-color: #2563eb;         /* hover:bg-blue-600 */
+  }
+  
+  
+  
+  
+  
+  /* Responsive Design */
+  @media screen and (max-width: 1024px) {
+    .appointment-card {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .doctor-info {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .actions {
+      align-items: center;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .doctor-info img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .btn {
+      font-size: 0.8rem;
+      padding: 8px 16px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .appointment-card {
+      padding: 15px;
+    }
+  
+    .doctor-info img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .btn {
+      font-size: 0.75rem;
+      padding: 6px 12px;
+    }
+  }
+  

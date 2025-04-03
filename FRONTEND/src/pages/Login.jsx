@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [login, setLogin] = useState("Sign Up");
+  const [login, setLogin] = useState("Login");
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -14,11 +14,11 @@ const Login = () => {
 
   const { token, setToken, backendurl } = useContext(AppContext)
 
-  
+
 
   const onSubmitHandle = async (e) => {
     e.preventDefault();
-    
+
     console.log(backendurl + "/api/user/register")
     try {
       if (login === "Sign Up") {
@@ -38,12 +38,12 @@ const Login = () => {
           toast.error(data.message)
         }
       }
-    } catch (error) { 
+    } catch (error) {
       toast.error(error.message)
     }
   };
 
-  
+
 
   useEffect(() => {
     if (token) {
@@ -76,7 +76,7 @@ const Login = () => {
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                 />
-                
+
               </div>
             )}
 
@@ -96,7 +96,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
               />
-              
+
             </div>
 
             <div>
@@ -115,7 +115,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
-            
+
             </div>
 
             {login === "Sign Up" && (
@@ -135,14 +135,14 @@ const Login = () => {
                   onChange={(e) => setCpassword(e.target.value)}
                   value={cpassword}
                 />
-                
+
               </div>
             )}
 
             <button
               type="submit"
               className="w-full px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              onClick={()=>{scrollTo(0,0)}}
+              onClick={() => { scrollTo(0, 0) }}
             >
               {login === "Sign Up" ? "Continue" : "Login"}
             </button>
@@ -150,7 +150,7 @@ const Login = () => {
 
           {login === "Login" && (
             <p className="mt-4 text-sm text-center text-gray-600">
-              <button className="text-blue-500 hover:underline" onClick={()=>navigate("/forgotPassword")}>
+              <button className="text-blue-500 hover:underline" onClick={() => navigate("/forgotPassword")}>
                 Forgot Password?
               </button>
             </p>

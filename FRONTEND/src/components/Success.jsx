@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { CheckCircleIcon } from "lucide-react";
-import { useNavigate,useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import axios from "axios"
 import { toast } from "react-toastify";
@@ -8,23 +8,23 @@ import { toast } from "react-toastify";
 
 export default function Success() {
 
-    const [searchParams] = useSearchParams();
-    const sessionId = searchParams.get("session_id"); // Get session_id from URL
-    const [transactionDetails, setTransactionDetails] = useState({
-        id:"",
-        amount:"",
-        date:""
-    });
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get("session_id"); // Get session_id from URL
+  const [transactionDetails, setTransactionDetails] = useState({
+    id: "",
+    amount: "",
+    date: ""
+  });
 
-    const {backendurl, token}=useContext(AppContext)
-  
-//   const [transactionDetails, setTransactionDetails] = useState({
-//     id: "#123456789",
-//     amount: "$100",
-//     date: new Date().toLocaleDateString(),
-//   });
+  const { backendurl, token } = useContext(AppContext)
 
-  const navigate=useNavigate()
+  //   const [transactionDetails, setTransactionDetails] = useState({
+  //     id: "#123456789",
+  //     amount: "$100",
+  //     date: new Date().toLocaleDateString(),
+  //   });
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (sessionId) {
@@ -34,24 +34,24 @@ export default function Success() {
 
   async function fetchTransactionDetails(sessionId) {
     try {
-      const {data} = await axios.post(backendurl+`/api/user/fetchTransactions`,{sessionId},{headers:{token}}); // Backend route
+      const { data } = await axios.post(backendurl + `/api/user/fetchTransactions`, { sessionId }, { headers: { token } }); // Backend route
       console.log(data.session.id)
       console.log(data.session.amount_total)
       console.log(data.session.created)
       console.log(data.session)
 
-      if(data.success){
+      if (data.success) {
         console.log("hello")
         console.log(data.session.id)
-      console.log(data.session.amount_total)
-      console.log(data.session.created)
+        console.log(data.session.amount_total)
+        console.log(data.session.created)
         setTransactionDetails({
-            id: data.session.id,
-            amount: `₹${(data.session.amount_total / 100)}`, // Convert cents to dollars
-            date: new Date(data.session.created * 1000).toLocaleDateString(),
-          });
+          id: data.session.id,
+          amount: `₹${(data.session.amount_total / 100)}`, // Convert cents to dollars
+          date: new Date(data.session.created * 1000).toLocaleDateString(),
+        });
 
-      }else{
+      } else {
         toast.error(data.message)
       }
       console.log(transactionDetails)
@@ -60,7 +60,7 @@ export default function Success() {
       toast.error("Error fetching transaction details:", error);
     }
   }
- 
+
 
   if (!transactionDetails.id) {
     return <div>Loading transaction details...</div>;
@@ -81,7 +81,13 @@ export default function Success() {
         </div>
 
         <div className="mt-6 space-y-3">
-          <button onClick={() => navigate(`/myappointment`)}  className="w-full py-2 bg-green-600 hover:bg-green-700 text-white">View Booking</button>
+          <button onClick={() => navigate(`/myappointment`)} className="w-full py-2 bg-green-600 hover:bg-green-700 text-white">View Booking</button>
+          <button
+            onClick={() => navigate("/invoice", { state: { sessionId } })}
+            className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            Download Invoice
+          </button>
           <button onClick={() => navigate(`/`)} className="w-full py-2 bg-gray-600 hover:bg-gray-700 text-white">Go to Home</button>
         </div>
       </div>

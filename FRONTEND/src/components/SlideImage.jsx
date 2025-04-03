@@ -7,7 +7,7 @@ import { assets } from '../assets/assets';
 //     `${assets.hospitalSlide1}`,
 //     `${assets.hospitalSlide2}`,
 //   ];
-  
+
 //   const [currentSlide, setCurrentSlide] = useState(0);
 
 //   useEffect(() => {
@@ -84,10 +84,10 @@ const SlideImage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-        `${assets.novacare2}`,
-        `${assets.hospitalSlide1}`,
-        `${assets.hospitalSlide2}`,
-      ];
+    `${assets.novacare2}`,
+    `${assets.hospitalSlide1}`,
+    `${assets.hospitalSlide2}`,
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {

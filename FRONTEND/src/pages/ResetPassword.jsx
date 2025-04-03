@@ -6,33 +6,33 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
 
-    const [newpassword,setnewpassword]=useState("")
-    const {backendurl}=useContext(AppContext)
-    const location=useLocation()
-    const email=location.state?.email
-    const navigate=useNavigate()
+  const [newpassword, setnewpassword] = useState("")
+  const { backendurl } = useContext(AppContext)
+  const location = useLocation()
+  const email = location.state?.email
+  const navigate = useNavigate()
 
-    const handleSubmit=async()=>{
-        if(!newpassword){
-            toast.error("please enter new password")
-        }else if(newpassword.length < 8){
-            toast.error("Enter a strong password")
-        }else{
-            const data= await axios.post(backendurl+"/api/user/userupdatepassword",{email,newpassword})
-            try {
-                if(data.data.success){
-                    toast.success(data.data.message)
-                    navigate("/")
-                }else{
-                    toast.error(data.data.message)
-                }
-                
-            } catch (error) {
-                console.log(error)
-                toast.error(error.message)
-            }
+  const handleSubmit = async () => {
+    if (!newpassword) {
+      toast.error("please enter new password")
+    } else if (newpassword.length < 8) {
+      toast.error("Enter a strong password")
+    } else {
+      const data = await axios.post(backendurl + "/api/user/userupdatepassword", { email, newpassword })
+      try {
+        if (data.data.success) {
+          toast.success(data.data.message)
+          navigate("/")
+        } else {
+          toast.error(data.data.message)
         }
+
+      } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+      }
     }
+  }
 
 
 
@@ -55,7 +55,7 @@ const ResetPassword = () => {
             id="password"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={newpassword}
-            onChange={(e)=>setnewpassword(e.target.value)}
+            onChange={(e) => setnewpassword(e.target.value)}
             placeholder="Enter new password"
           />
         </div>

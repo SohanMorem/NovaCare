@@ -78,6 +78,7 @@ const cancelAppointment=async (appointmentId)=>{
       if(data.success){
           toast.success(data.message)
           getLatestAppointment()
+          getTotalEarning()
       }else{
           toast.error(data.message)
       }

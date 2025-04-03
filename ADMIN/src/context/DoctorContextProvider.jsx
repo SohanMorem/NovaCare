@@ -25,12 +25,27 @@ const DoctorContextProvider=(props)=>{
         }
     }
 
+
     const getDoctorDetail=async ()=>{
         try {
             const {data}=await axios.post(backendurl+"/api/doctor/getdoctorprofile",{},{headers:{dtoken}})
             if(data.success){
                 setDoctorData(data.doctorData)
                 console.log(data.doctorData)
+            }else{
+                toast.error(data.message)
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        }
+    }
+
+    const changeAvailable=async (docId)=>{
+        try {
+            const {data}=await axios.post(backendurl+"/api/doctor/available",{docId},{headers:{dtoken}})
+            if(data.success){
+                toast.success(data.message)
             }else{
                 toast.error(data.message)
             }
@@ -57,7 +72,8 @@ const DoctorContextProvider=(props)=>{
         backendurl,
         doctorData,
         setDoctorData,
-        getDoctorDetail
+        getDoctorDetail,
+        changeAvailable
     }
 
     return(

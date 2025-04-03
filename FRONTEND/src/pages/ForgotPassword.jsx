@@ -9,32 +9,32 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
 
-  const {backendurl}=useContext(AppContext)
-  const navigate=useNavigate()
-  
+  const { backendurl } = useContext(AppContext)
+  const navigate = useNavigate()
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
   }
 
-  const handleSubmit =async () => {
+  const handleSubmit = async () => {
     if (!email) {
       toast.error("please enter email")
     } else {
       // Handle sending OTP logic here (call an API or other logic)
-      const data=await axios.post(backendurl + "/api/user/userforgotpassword",{email})
+      const data = await axios.post(backendurl + "/api/user/userforgotpassword", { email })
 
       try {
-        if(data.data.success){
-            toast.success(data.data.message)
-            console.log("OTP sent to", email)
-            navigate("/enterotp", { state: { email: email } })
-          }else{
-            toast.error(data.data.message);
-          }
+        if (data.data.success) {
+          toast.success(data.data.message)
+          console.log("OTP sent to", email)
+          navigate("/enterotp", { state: { email: email } })
+        } else {
+          toast.error(data.data.message);
+        }
       } catch (error) {
         toast.error(error.message)
       }
-      
+
     }
   }
 

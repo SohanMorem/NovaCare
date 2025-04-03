@@ -474,7 +474,7 @@ NovaCare Health Management
     try {
         const {userId}=req.body
 
-        const appointments=await appointmentModel.find({userId})
+        const appointments=await appointmentModel.find({userId}).sort({ date: -1 });
 
         res.json({success:true,appointments})
         
@@ -492,7 +492,7 @@ NovaCare Health Management
         const appointmentData=await appointmentModel.findById(appointmentId)
     
         if(appointmentData.userId == userId){
-            await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+            await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true,payment:false})
     
             const {docId,slotDate,slotTime}=appointmentData
     
@@ -506,7 +506,7 @@ NovaCare Health Management
     
             await doctorModel.findByIdAndUpdate(docId,{slots_book})
     
-            res.json({success:true,message:"Appointmnet Cancelled Succcessfully"})
+            res.json({success:true,message:"Appointment Cancelled Succcessfully"})
         }else{
             res.json({success:false,message:"uuser not login"})
         }
@@ -619,8 +619,43 @@ NovaCare Health Management</pre>`;
         res.status(500).json({ error: error.message });
       }
 }
+
+const invoice=async (req,res)=>{
+    try {
+        const { sessionId } = req.body;
+        console.log("Session is:" + sessionId)
+        if (!sessionId) {
+          return res.json({ success:false,error: "Session ID is required" });
+        }
+
+        
+    
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+        console.log("sessions:",session)
+        
+        if (!session) {
+          return res.json({success:false,error: "Transaction not found" });
+        }
+
+        const appointmentId = session.metadata?.appointmentId;
+        console.log("Appointment ID:", appointmentId);
+
+        const appointmentData=await appointmentModel.findById(appointmentId)
+
+        if(session.payment_status === "paid"){
+            await appointmentModel.findByIdAndUpdate(appointmentId,{payment:true})
+
+        return res.json({success:true,appointmentData});
+       }
+    
+       res.json({ success: false, message: "Payment not completed" });
+       
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+}
   
 
 
 
-export { registerUser, loginUser, getUserDetails, updateUserDetails,UserContact,userForgotPassword, userverifyotp, updatePassword, resendOtp, bookAppointment, ListBookAppointmnets, cancelAppointment, paymentIntegration, fetchTransactions}
+export { registerUser, loginUser, getUserDetails, updateUserDetails,UserContact,userForgotPassword, userverifyotp, updatePassword, resendOtp, bookAppointment, ListBookAppointmnets, cancelAppointment, paymentIntegration, fetchTransactions, invoice}

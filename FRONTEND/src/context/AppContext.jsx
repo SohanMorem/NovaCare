@@ -1,56 +1,56 @@
 import { createContext, useEffect, useState } from "react";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 import axios from "axios"
 
-export const AppContext=createContext()
+export const AppContext = createContext()
 
-const AppContextProvider=(props)=>{
+const AppContextProvider = (props) => {
 
-    const [token,setToken]=useState(localStorage.getItem("token")?localStorage.getItem("token"):false)
+    const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : false)
 
-    const backendurl= import.meta.env.VITE_BACKEND_URL
+    const backendurl = import.meta.env.VITE_BACKEND_URL
 
-    const currencySymbol="₹"
+    const currencySymbol = "₹"
 
-    const [userData,setUserData]=useState(false)
-    const [doctors,setDoctors]=useState([])
+    const [userData, setUserData] = useState(false)
+    const [doctors, setDoctors] = useState([])
 
-    const  getDoctorsData=async ()=>{
+    const getDoctorsData = async () => {
         try {
-            const {data}=await axios.get("http://localhost:4000/api/doctor/list")
-            if(data.success){
+            const { data } = await axios.get("http://localhost:4000/api/doctor/list")
+            if (data.success) {
                 setDoctors(data.doctors)
                 console.log(data.doctors)
             }
         } catch (error) {
             toast.error(error.message)
         }
-    } 
+    }
 
-    useEffect(()=>{
+    useEffect(() => {
         getDoctorsData()
-    },[])
+    }, [])
 
-    
 
-    const loadUserData=async ()=>{
+
+    const loadUserData = async () => {
         try {
 
-            const {data}=await axios.get(backendurl + '/api/user/getUserDetail',{headers:{token}})
+            const { data } = await axios.get(backendurl + '/api/user/getUserDetail', { headers: { token } })
 
-            if(data.success){
+            if (data.success) {
                 setUserData(data.userData)
-            }else{
+            } else {
                 toast.error(data.message)
             }
-            
+
         } catch (error) {
             console.log(error)
             toast.error(error.message)
         }
     }
 
-    const value={
+    const value = {
         doctors,
         getDoctorsData,
         currencySymbol,
@@ -62,15 +62,15 @@ const AppContextProvider=(props)=>{
         loadUserData
     }
 
-    useEffect(()=>{
-        if(token){
+    useEffect(() => {
+        if (token) {
             loadUserData()
-        }else{
+        } else {
             setUserData(false)
         }
-    },[token])
+    }, [token])
 
-    return(
+    return (
         <AppContext.Provider value={value}>
             {props.children}
         </AppContext.Provider>

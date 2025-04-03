@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken"
 import appointmentModel from "../models/appointmentModel.js"
 import mongoose from "mongoose"
 import userModel from "../models/userModel.js"
+import {sendContact, sendMail} from '../middleware/sendMail.js'
 
 
 
@@ -163,7 +164,7 @@ const cancelAppointment=async (req,res)=>{
         const docId = appointmentData.docData._id
         console.log("doc:",docId,"app:",appointmentId)
         if(appointmentData){
-            await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+            await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true,payment:false})
     
             const {slotDate,slotTime}=appointmentData
     
@@ -178,6 +179,25 @@ const cancelAppointment=async (req,res)=>{
             await doctorModel.findByIdAndUpdate(docId,{slots_book})
     
             res.json({success:true,message:"Appointment Cancelled Succcessfully"})
+
+            const cancelappointmentMessage = `<pre>
+Dear ${appointmentData.userData.name},
+
+We regret to inform you that your appointment scheduled on ${slotDate} at ${slotTime} with Dr. ${appointmentData.docData.name} has been cancelled by the admin.  
+
+If you have any questions or would like to reschedule, please contact us at  
+📞 <a href="tel:8140794715">8140794715</a>.  
+
+We apologize for any inconvenience caused and appreciate your understanding.  
+
+Best regards,  
+NovaCare Health Management  
+</pre>`;
+
+
+sendMail(appointmentData.userData.email,"CANCEL APPOINTMENT","",cancelappointmentMessage)
+
+            
         
     } }catch (error) {
         res.json({ success: false, message: error.message })

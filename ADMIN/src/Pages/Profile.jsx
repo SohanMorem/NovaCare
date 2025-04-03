@@ -10,7 +10,7 @@ const Profile = () => {
     const [image, setImage] = useState(false);
 
     const { dtoken, backendurl, doctorData, setDoctorData, getDoctorDetail } = useContext(DoctorContext);
-
+    const {  changeAvailable} = useContext(DoctorContext);
     const updateDoctorDetail = async () => {
         try {
             console.log("clicked");
@@ -43,6 +43,7 @@ const Profile = () => {
 
     useEffect(()=>{
         getDoctorDetail()
+        
 },[dtoken])
 
     return doctorData && (
@@ -60,6 +61,23 @@ const Profile = () => {
                         )}
                     </div>
                     <input onChange={(e) => setImage(e.target.files[0])} type="file" name="image" id="image" hidden />
+                </label>
+            </div>
+
+            {/* Availability Toggle */}
+            <div className="flex items-center gap-3">
+                <p className="text-gray-700 font-medium">Available:</p>
+                <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                        type="checkbox"
+                        checked={doctorData.available}
+                        onChange={() => {
+                            changeAvailable(doctorData._id);
+                            setDoctorData(prev => ({ ...prev, available: !prev.available }));  // <-- Fix: Updates UI instantly
+                        }}
+                        className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                 </label>
             </div>
 

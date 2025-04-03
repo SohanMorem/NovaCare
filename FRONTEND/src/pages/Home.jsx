@@ -7,13 +7,13 @@ import SlideImage from '../components/SlideImage'
 const Home = () => {
   return (
     <>
-    <div className="bg-gray-100">
-      <SlideImage></SlideImage>
-    <Header/>
-    <SpecialityMenu/>
-    <TopDoctor/>
-    </div>   
-   </>
+      <div className="bg-gray-100">
+        <SlideImage></SlideImage>
+        <Header />
+        <SpecialityMenu />
+        <TopDoctor />
+      </div>
+    </>
   )
 }
 

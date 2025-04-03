@@ -8,12 +8,12 @@ import { toast } from 'react-toastify';
 const Contact = () => {
   // State to manage form data and errors
 
-  const {backendurl,token}=useContext(AppContext)
+  const { backendurl, token } = useContext(AppContext)
 
-  const [username,setUsername]=useState("")
-  const [email,setEmail]=useState("")
-  const [phone,setPhone]=useState("")
-  const [message,setMessage]=useState("")
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [message, setMessage] = useState("")
 
   const [errors, setErrors] = useState({});
 
@@ -46,16 +46,16 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-        const {data} = await axios.post(backendurl+"/api/user/usercontact",{username,email,phone,message},{headers:{token}})
-        if(data.success){
-          toast.success(data.message)
-        }else{
-          toast.error(data.message)
-        }
-    setUsername("")
-    setEmail("")
-    setPhone("")
-    setMessage("")
+      const { data } = await axios.post(backendurl + "/api/user/usercontact", { username, email, phone, message }, { headers: { token } })
+      if (data.success) {
+        toast.success(data.message)
+      } else {
+        toast.error(data.message)
+      }
+      setUsername("")
+      setEmail("")
+      setPhone("")
+      setMessage("")
       setErrors({});
     }
   };
@@ -64,7 +64,7 @@ const Contact = () => {
   //   try {
   //     const { data } = await axios.post(`${backendurl}/api/user/sendhello`);
   //     console.log(data);
-  
+
   //     if (data?.success) {
   //       toast.success(data.message);
   //     } else {
@@ -74,7 +74,7 @@ const Contact = () => {
   //     toast.error(error.message);
   //   }
   // };
-  
+
 
   // const usercontact= async ()=>{
   //   const {data} = await axios.post(backendurl+"/api/user/usercontact",{username,email,phone,message})
@@ -97,7 +97,7 @@ const Contact = () => {
       {/* Right Side: Form */}
       <div className="w-full md:w-1/2 bg-black rounded-lg shadow-lg p-8">
         <h2 className="text-2xl font-bold mb-6 text-white text-center">Contact Us</h2>
-        <form  className="space-y-4">
+        <form className="space-y-4">
           {/* User Name */}
           <div>
             <label className="block text-white text-sm font-bold mb-2" htmlFor="username">
@@ -108,11 +108,10 @@ const Contact = () => {
               id="username"
               name="username"
               value={username}
-              onChange={(e)=>setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your name"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.username ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.username ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                }`}
             />
             {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
           </div>
@@ -127,11 +126,10 @@ const Contact = () => {
               id="email"
               name="email"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.email ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.email ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                }`}
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
           </div>
@@ -146,11 +144,10 @@ const Contact = () => {
               id="phone"
               name="phone"
               value={phone}
-              onChange={(e)=>setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
               placeholder="Enter your phone number"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.phone ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.phone ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                }`}
             />
             {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
           </div>
@@ -164,12 +161,11 @@ const Contact = () => {
               id="message"
               name="message"
               value={message}
-              onChange={(e)=>setMessage(e.target.value)}
+              onChange={(e) => setMessage(e.target.value)}
               rows="4"
               placeholder="Enter your message"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.message ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
-              }`}
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.message ? 'border-red-500 focus:ring-red-500' : 'focus:ring-blue-500'
+                }`}
             ></textarea>
             {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
           </div>
