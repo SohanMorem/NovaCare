@@ -91,14 +91,15 @@
   }
 
   .completed-btn {
-    height: 4rem;                  /* h-16 */
+    height: 3rem;                  /* h-16 */
     width: 100%;                    /* w-full */
-    font-size: 1.5rem;              /* text-2xl */
+    font-size: 1rem;              /* text-2xl */
     background-color: #e5e7eb;      /* bg-gray-200 */
     color: #16a34a;                 /* text-green-600 */
     font-weight: 600;               /* font-semibold */
     padding: 0.5rem 1rem;           /* py-2 px-4 */
-    border-radius: 0.25rem;         /* rounded */
+    border-radius: 0.25rem; 
+    border: 2px solid #16a34a;       /* rounded */
   }
 
   .canceled-btn {
@@ -156,7 +157,7 @@
   
   
   /* Responsive Design */
-  @media screen and (max-width: 1024px) {
+  /* @media screen and (max-width: 1024px) {
     .appointment-card {
       flex-direction: column;
       gap: 15px;
@@ -170,10 +171,24 @@
     .actions {
       align-items: center;
     }
-  }
+  } */
   
   @media screen and (max-width: 768px) {
-    .doctor-info img {
+    .appointment-card {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .doctor-info {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .actions {
+      align-items: center;
+    }
+    
+    /* .doctor-info img {
       width: 100px;
       height: 100px;
     }
@@ -181,7 +196,7 @@
     .btn {
       font-size: 0.8rem;
       padding: 8px 16px;
-    }
+    } */
   }
   
   @media screen and (max-width: 480px) {
